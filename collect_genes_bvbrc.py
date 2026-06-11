@@ -37,22 +37,41 @@ def collect_genes(species: str):
         if gene_df.empty:
             print(f"     No specialty genes found for [{id}] {name}.\n")
             continue
-        print(f"Found {len(gene_df)} antibiotic resistance genes for [{id}] {name}.")
+        print(f"Found {len(gene_df)} specialty genes for [{id}] {name}.")
 
         # filter for antibiotic resistance property
-        if "property" in gene_df.columns:
-            gene_df = gene_df[
-                gene_df["property"].str.contains(
-                    "Antibiotic Resistance", case=False, na=False
-                )
-            ]
+        if "property" not in gene_df.columns:
+            print(f"    No 'property' column found for [{id}] {name}, skipping.")
+            continue
+
+        gene_df = gene_df[gene_df["property"].str.contains("antibiotic resistance", case=False, na=True)]
 
         if gene_df.empty:
             print(f"    No antibiotic resistance genes found for [{id}] {name}.")
             continue
 
-        gene_df.to_csv(gene_file_path, mode="a", index=False, header=not os.path.exists(gene_file_path))
-        print(f":) Found {len(gene_df)} antibiotic resistance genes for [{id}] {name}!")
+        if os.path.exists(gene_file_path):
+            # we can't just append each row as we go without checking the data because some column data is left blank.
+            # this causes a shift in the data. for example, if "date added" is left blank, 
+            # the next column would fill in its place even though it would be incorrect.
+
+            # read existing headers and merge with new columns
+            existing_cols = pd.read_csv(gene_file_path, nrows=0).columns.tolist()
+            all_cols = existing_cols + [c for c in gene_df.columns if c not in existing_cols]
+
+            # rewrite the file with any new columns added, filling old rows with NaN
+            if all_cols != existing_cols:
+                existing_df = pd.read_csv(gene_file_path)
+                existing_df = existing_df.reindex(columns=all_cols)
+                existing_df.to_csv(gene_file_path, index=False)
+
+            # align new rows to the full column set before appending
+            gene_df = gene_df.reindex(columns=all_cols)
+            gene_df.to_csv(gene_file_path, mode="a", index=False, header=False)
+        else:
+            # first write — just dump as-is
+            gene_df.to_csv(gene_file_path, index=False)
+        print(f":) Found {len(gene_df)} antibiotic resistance genes for [{id}] {name}!\n")
 
     print(f"All genomes searched and saved to {gene_file_path}!")
 

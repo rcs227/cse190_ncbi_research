@@ -5,11 +5,13 @@ import bvbrc as bv
 client = bv.GenomeClient()
 # extract s. aureus accessions
 sa_df = pd.read_csv("SA_local_ids_summary.csv")
-sa_accessions = sa_df["Accession"].tolist()
 df = pd.DataFrame()
 filename = "staph_from_accessions.csv"
-for accession in sa_accessions:
+for row in sa_df.iterrows():
     file_exists = os.path.exists(filename)
+
+    desc = row["Description"]
+    
 
     # check refseq accession
     q = bv.query(
