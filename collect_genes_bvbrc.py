@@ -26,11 +26,14 @@ def collect_genes(species: str):
     client = bv.SpGeneClient()
     gene_file_path = species.replace(" ", "_") + "_gene_info.csv"
 
+    i = 1
+    num_genomes = len(id_df)
     for id, name in zip(id_df['genome_id'], id_df['genome_name']):
         q = bv.query(genome_id = id)
 
         # retrieve all specialty genes of genome
-        print(f"Querying specialty genes for [{id}] {name}...")
+        print(f"[{i}/{num_genomes}] Querying specialty genes for [{id}] {name}...")
+        i += 1
         response = client.submit_query(q)
         gene_df = response.to_pandas()
 
@@ -41,13 +44,13 @@ def collect_genes(species: str):
 
         # filter for antibiotic resistance property
         if "property" not in gene_df.columns:
-            print(f"    No 'property' column found for [{id}] {name}, skipping.")
+            print(f"    No 'property' column found for [{id}] {name}, skipping.\n")
             continue
 
         gene_df = gene_df[gene_df["property"].str.contains("antibiotic resistance", case=False, na=True)]
 
         if gene_df.empty:
-            print(f"    No antibiotic resistance genes found for [{id}] {name}.")
+            print(f"    No antibiotic resistance genes found for [{id}] {name}.\n")
             continue
 
         if os.path.exists(gene_file_path):
