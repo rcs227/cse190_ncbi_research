@@ -46,13 +46,15 @@ def process_genome_data(input_json):
             
     return organized_data
 
-# Usage
-# with open('input.json', 'r') as f:
-#     data = json.load(f)
-# result = process_genome_data(data)
-# print(json.dumps(result, indent=4))
 
+# print output
 with open("test.json", "r") as f:
     data = json.load(f)
 result = process_genome_data(data)
 print(json.dumps(result, indent=4))
+
+# save output to file
+#filename = "results.json"
+#with open(filename, "w", encoding="utf-8") as f:
+#    json.dump(result, f, indent=4)
+#print(f"Saved results to {filename}")
