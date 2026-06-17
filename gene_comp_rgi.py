@@ -34,11 +34,11 @@ def process_genome_data(input_json):
             organized_data[accession] = {}
             
         for gene_id, gene_data in value.items():
+            gene_name = gene_data.get("ARO_name", "Unnamed_Gene")
             dna = gene_data.get("dna_sequence_from_broadstreet", "")
             at_pct, gc_pct, first, last = calculate_dna_stats(dna)
             
-            organized_data[accession][gene_id] = {
-                "name": gene_data.get("model_name"),
+            organized_data[accession][gene_name] = {
                 "at_percent": at_pct,
                 "gc_percent": gc_pct,
                 "sequence_ends": f"{first} {last}"
