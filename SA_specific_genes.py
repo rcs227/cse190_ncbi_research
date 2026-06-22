@@ -39,14 +39,15 @@ def find_specific_genes(genome_ids, target_genes, output_csv="SA_specific_genes.
                     #check BOTH CDS and gene features to avoid ncbi annotation quirks
                     # Loop through all the "features" (aka annotated parts of the genome)
                     for feature in record.features:
-                        if feature.type in ["CDS", "gene"]:
+                        #if feature.type in ["CDS", "gene"]: -- NOTE: had this before but was getting double for the specific genes, switched to just looking at "gene" feature
+                        if feature.type in ["gene"]:
                             # extract gene name or product name
                             gene_names = feature.qualifiers.get("gene", [])
                             product_names = feature.qualifiers.get("product", [])
                             
                             #combine them into one string to search through
                             all_names = " ".join(gene_names + product_names).lower()
-
+                            
                             # check if any of the target genes are explicitly in the name/product
                             for target in target_genes_lower:
                                 # NOTE: use exact word matching to ensure stuff like "rpoC-like" isnt accidentally grabbed
@@ -87,7 +88,7 @@ def find_specific_genes(genome_ids, target_genes, output_csv="SA_specific_genes.
     print(f"\nAnalysis complete! Results exported to '{output_csv}'")
 
 
-# --- Run the Script ---
+# Run the script:
 # can pass a single ID or a whole list of IDs here
 # TODO: extract the ids from SA_local_ids_summary.csv automatically
 test_genome_ids = ["CP180884.1","CP180898.1","CP180889.1","CP180891.1","CP180881.1","CP180886.1","CP180880.1","CP180866.1","CP180857.1","CP180876.1"] 
