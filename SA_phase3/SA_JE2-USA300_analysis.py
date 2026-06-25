@@ -167,6 +167,6 @@ usa300_accession = ["NC_007793.1"]
 my_csv_file = "significant_list.csv" # input csv file (for first row reading automation)
 
 # Set row_limit=5 to test. When ready for the whole spreadsheet, change to: row_limit=None
-analyze_usa300_omni(usa300_accession, my_csv_file, output_csv="USA300_Results.csv", row_limit=10)
+analyze_usa300_omni(usa300_accession, my_csv_file, output_csv="USA300_Results.csv", row_limit=None)
 
 # find_specific_genes(test_genome_ids, target_genes_list)
