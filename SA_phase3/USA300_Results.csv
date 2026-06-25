@@ -1,0 +1,11 @@
+Genome_ID,Genome_Name,Target_Searched,Matched_Via,Sequence_Length,First_3,Last_3,GC_pct,AT_pct
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,esaC,Gene Symbol (esaC),393,ATG,TAA,31.04,68.96
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,xpt,Gene Symbol (xpt),579,GTG,TAA,35.75,64.25
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS02065,Exact Locus Tag,1269,ATG,TAA,35.78,64.22
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS04985,Exact Locus Tag,570,ATG,TAA,30.18,69.82
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,sspA,Gene Symbol (sspA),1011,ATG,TAA,36.89,63.11
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS06875,Exact Locus Tag,633,ATG,TAA,31.60,68.40
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS07480,Exact Locus Tag,117,TTG,TAA,23.93,76.07
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS09630,Exact Locus Tag,567,ATG,TAA,31.75,68.25
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS10780,Exact Locus Tag,231,ATG,TAA,28.57,71.43
+NC_007793.1,Staphylococcus aureus subsp. aureus USA3,SAUSA300_RS11820,Exact Locus Tag,1563,ATG,TAA,35.89,64.11
