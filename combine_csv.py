@@ -17,6 +17,7 @@ def combine(reg_file, comp_file, output_file="output.csv"):
     comp_df_filtered = comp_df.drop(columns=exclusions)
 
     combined_df = pd.merge(reg_df, comp_df_filtered, left_on=["gene_name"], right_on=["Gene_Found"], how='inner')
+    combined_df = combined_df.drop(columns="Gene_Found")
     combined_df.to_csv(output_file, index = False)
 
 
