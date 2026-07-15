@@ -39,9 +39,9 @@ CSV_COLUMNS = {
 
 BASES = ["A", "C", "G", "T"]
 
+# One-hot encodes 3-letter codon structures into 12 distinct 
+# binary markers, matching the NN's exact feature pipeline.
 def one_hot_positions(series, prefix):
-    """One-hot encodes 3-letter codon structures into 12 distinct 
-    binary markers, matching your colleague's exact feature pipeline."""
     out = pd.DataFrame(index=series.index)
     for pos in range(3):
         for base in BASES:
@@ -64,7 +64,7 @@ def run_unsupervised_analysis(input_file, n_clusters=4):
     numeric_cols = [
         CSV_COLUMNS["log2_fold_change"],
         CSV_COLUMNS["log_pvalue"],
-        CSV_COLUMNS["seq_length"],
+        CSV_COLUMNS["at_pct"],
         CSV_COLUMNS["gc_pct"]
     ]
     
