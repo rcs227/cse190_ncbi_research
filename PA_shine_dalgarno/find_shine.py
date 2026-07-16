@@ -136,7 +136,7 @@ def extract_significant_sd_data(dna_filepath, genes_list, output_csv, sd_sequenc
 
 
 def find_number_genes():
-    csv_path = 'SA_combined.csv'
+    csv_path = 'SA_full_seq.csv'
 
     df = pd.read_csv(csv_path)
     rows = df.itertuples(index=False)
@@ -155,7 +155,7 @@ def find_number_genes():
 
     for row in rows:
         item = row.Full_Sequence
-        name = row.gene_name
+        name = row.Gene_Found
         if item in target_text:
             genes.append({"name": name, "sequence": item})
 
