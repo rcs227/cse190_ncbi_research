@@ -27,4 +27,4 @@ def combine(shine_file, dna_file, output_file):
     shine_df.to_csv(output_file, index=False)
     print(f"Successfully saved to {output_file}")
 
-combine("shine.csv", "PAO1_DNA.csv", "PA_shine_data.csv")
+combine("SA_shine.csv", "SA_DNA.csv", "SA_shine_data.csv")
